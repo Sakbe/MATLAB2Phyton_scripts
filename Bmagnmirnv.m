@@ -8,7 +8,7 @@ function [ Bmirn ] = Bmagnmirnv( Z_filament,R_filament,I_filament,r_mirnv,z_mirn
 Zc=Z_filament;
 I=I_filament;
 
-turns=1; %%%% porque é modelo de filamentos
+turns=1; %%%% I just have one filament of one turn
 
 N=100;   % No of grids in the coil ( X-Y plane)
 u0=4*pi*0.001;   % [microWb/(A cm)]
@@ -16,7 +16,7 @@ phi=0:2*pi/(N-1):2*pi; % For describing a circle (coil)
 
 Rc=R_filament*cos(phi); % R-coordinates of the filament
 Yc=R_filament*sin(phi); % Y-coordinates of the filament
-% Zc(1:25)=Zc;
+
 
 %Lets obtain the position vectors from dl to the mirnov 
 %%% mirnov is localized in the plane (y=0)
@@ -65,7 +65,7 @@ vector=[Z_filament-z_mirnv,R_filament-r_mirnv];%Vector from center of chamber to
 unit_vec=[vector]./norm(vector); %% Unit vector
 norm_vec=[unit_vec(2),-unit_vec(1)];%%%  Normal vector, coil direction
  Bmirn=abs(BR*unit_vec(2)+Bz*unit_vec(1));
- Bmirn=sqrt(BR^2+Bz^2+By^2);
+
  Bmirn=dot([Bz,BR],norm_vec);
 
 Bmirn=0.01*Bmirn;%fator de 0.01 pra ter [T] 
